@@ -1,17 +1,18 @@
 locals {
-  cluster_name = "swarm"
+  environments = ["dev", "qa"]
 }
 
-module "cluster-1" {
+module "cluster" {
   source = "./modules/local"
+
+  count        = length(local.environments)
+  cluster_name = local.environments[count.index]
 }
+
 
 resource "local_sensitive_file" "kubeconfig" {
-  content  = module.cluster-1.kubeconfig
-  filename = pathexpand("~/.k3d/kubeconfig-${local.cluster_name}.yaml")
-}
+  count = length(local.environments)
 
-moved {
-  from = k3d_cluster.swarm
-  to   = module.cluster-1.k3d_cluster.swarm
+  content  = module.cluster[count.index].kubeconfig
+  filename = pathexpand("~/.k3d/kubeconfig-${local.environments[count.index]}.yaml")
 }
