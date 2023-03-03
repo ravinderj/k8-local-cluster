@@ -18,10 +18,15 @@ resource "local_sensitive_file" "kubeconfig" {
 
 # Create local container registry
 resource "k3d_registry" "myregistry" {
-    name = "myregistry.local"
-    port {
-      host = "localhost"
-      host_ip = "0.0.0.0"
-      host_port = "5002"
-    }
+  name = "myregistry.localhost"
+  port {
+    host      = "localhost"
+    host_ip   = "0.0.0.0"
+    host_port = "5002"
+  }
+}
+
+resource "docker_registry_image" "helloworld" {
+  name                 = "localhost:5002/dwarka:1.0.0"
+  insecure_skip_verify = true
 }

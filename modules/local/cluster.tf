@@ -5,7 +5,7 @@ resource "k3d_cluster" "swarm" {
 
   registries {
     use = [
-      "k3d-myregistry.local:5002"
+      "k3d-myregistry.localhost:5002"
     ]
   }
 }
