@@ -6,7 +6,7 @@ k3d registry list - list container registries
 k3d kubeconfig write <cluster-name...> - list kubeconfig path (can give more than 1 cluster-name)
 
 ## helm commands
-### for the current kubeconfig
+### for the current kubeconfig (export KUBECONFIG=$(k3d kubeconfig write <cluster-name>))
 helm create <chart-name> - create helm chart
 helm install <name> <chart> - install/upload the chart(release) to kubernetes (helm install dwarka ./helm-charts/dwarka/)
 helm uninstall <name> - uninstall the release
