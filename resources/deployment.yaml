@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dwarka-deployment
+  labels:
+    app: dwarka
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: dwarka
+  template:
+    metadata:
+      labels:
+        app: dwarka
+    spec:
+      containers:
+      - name: dwarka
+        image: k3d-myregistry.localhost:5002/dwarka:1.0.0
+        args:
+        - server
+        ports:
+        - containerPort: 1410
