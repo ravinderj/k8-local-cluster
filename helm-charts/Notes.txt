@@ -1,0 +1,13 @@
+## create a new chart in helm-charts directory
+helm create dwarka
+
+## Update application specific attributes in /helm-charts/dwarka/values.yaml
+replicaCount: 2 # (application replica)
+repository: k3d-myregistry.localhost:5002/dwarka # (image)
+tag: "1.0.0" # (image.tag)
+port: 1410 # (service.port)
+
+## Update health endpoint in helm-charts/dwarka/templates/deployment.yaml
+path: /ping # (containers.livenessProbe, containers.livenessProbe)
+
+## Add args to application server, if required
