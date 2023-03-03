@@ -8,6 +8,10 @@ terraform {
       source  = "kreuzwerker/docker"
       version = "3.0.1"
     }
+    helm = {
+      source  = "hashicorp/helm"
+      version = "2.9.0"
+    }
   }
 }
 
@@ -16,5 +20,11 @@ provider "docker" {
   registry_auth {
     address       = "http://localhost:5002"
     auth_disabled = true
+  }
+}
+
+provider "helm" {
+  kubernetes {
+    config_paths = ["~/.k3d/kubeconfig-dev.yaml"]
   }
 }
